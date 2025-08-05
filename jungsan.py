@@ -35,7 +35,7 @@ def classify_am_pm(hhmm):
     m = re.match(r'(\d{1,2}):(\d{2})', str(hhmm))
     if not m:
         return '정보없음'
-    return '오전' if int(m.group(1)) < 12 else '오후'
+    return '오전' if int(m.group(1)) <= 12 else '오후'
 
 def amount_for_minutes(mins: int) -> int:
     """분→금액: <60=0, 60~239=10,000, ≥240=20,000"""
