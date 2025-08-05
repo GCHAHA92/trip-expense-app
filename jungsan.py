@@ -79,7 +79,7 @@ def summarize_trip_monthly(df: pd.DataFrame):
         if not hhmm: return '정보없음'
         m = re.match(r'(\d{1,2}):(\d{2})', str(hhmm))
         if not m: return '정보없음'
-        return '오전' if int(m.group(1)) <= 12 else '오후'
+        return '오전' if int(m.group(1)) < 12 else '오후'
 
     def amount_for_minutes(mins: int) -> int:
         if mins < 60: return 0
