@@ -4,7 +4,7 @@ import pandas as pd
 from io import BytesIO
 from jungsan import summarize_trip_monthly  # 동일 폴더의 jungsan.py 사용
 
-st.set_page_config(page_title="출장비 정산기 (월별 탭)", layout="wide")
+st.set_page_config(page_title="출장비 정산기 (v.20250806)", layout="wide")
 st.title("🚗 출장비 월별 자동 정산기 (모두 힘내세요~~!!!!!)")
 
 uploaded_file = st.file_uploader("📁 엑셀 파일 (.xlsx) 업로드", type=["xlsx"])
