@@ -47,7 +47,7 @@ def summarize_trip_monthly(df: pd.DataFrame):
         df = df[df[DATE_COL] != '일자'].copy()
 
     df['출장일자'] = pd.to_datetime(df['출장시작'], errors='coerce').dt.date
-    df['출장월']   = pd.to_datetime(df['출장시작'], errors='coerce').dt.month
+    df['출장월'] = pd.to_datetime(df['출장시작'], errors='coerce').dt.month
 
     for col in ['성명', DURATION_COL, VEHICLE_COL, START_TIME_COL]:
         if col not in df.columns:
@@ -116,9 +116,14 @@ def summarize_trip_monthly(df: pd.DataFrame):
                  .fillna(0)
         )
 
-        # 안전하게 처리
-        final['4시간이상(공용차량O)'] = final.get('4시간이상(공용차량O)', 0).astype(int)
-        final['4시간이상(공용차량X)'] = final.get('4시간이상(공용차량X)', 0).astype(int)
+        # ✅ 안전한 컬럼 처리
+        if '4시간이상(공용차량O)' not in final.columns:
+            final['4시간이상(공용차량O)'] = 0
+        if '4시간이상(공용차량X)' not in final.columns:
+            final['4시간이상(공용차량X)'] = 0
+
+        final['4시간이상(공용차량O)'] = final['4시간이상(공용차량O)'].astype(int)
+        final['4시간이상(공용차량X)'] = final['4시간이상(공용차량X)'].astype(int)
         final['총지급액'] = final['총지급액'].astype(int).map('{:,}'.format)
 
         results[f"{month}월"] = final.sort_values('성명')
