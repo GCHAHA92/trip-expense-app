@@ -118,8 +118,8 @@ def summarize_trip_monthly(df: pd.DataFrame):
         )
 
         final['총지급액'] = final['총지급액'].astype(int).map('{:,}'.format)
-        final['4시간이상(공용차량O)'] = final['4시간이상(공용차량O)'].astype(int)
-        final['4시간이상(공용차량X)'] = final['4시간이상(공용차량X)'].astype(int)
+        final['4시간이상(공용차량O)'] = final.get('4시간이상(공용차량O)', 0).astype(int)
+final['4시간이상(공용차량X)'] = final.get('4시간이상(공용차량X)', 0).astype(int)
 
         results[f"{month}월"] = final.sort_values('성명')
 
